@@ -4,22 +4,12 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.Console;
-import java.util.logging.Logger;
 
 public class GuardarMensajes {
-    private static final Logger logger = Logger.getLogger(GuardarMensajes.class.getName());
 
     public static void main(String[] args) {
-        Console console = System.console();
-
-        if (console == null) {
-            logger.severe("No hay consola disponible");
-            System.exit(1);
-        }
-
-        console.printf("%n=== ESCRITURA DE ARCHIVOS ===%n");
-        console.printf("Creando carpeta de recursos y escribiendo archivo de ejemplo...%n%n");
+        System.out.println("\n=== ESCRITURA DE ARCHIVOS ===");
+        System.out.println("Creando carpeta de recursos y escribiendo archivo de ejemplo...");
 
         // Crear carpeta
         File resourcesDir = new File("Recursos");
@@ -27,13 +17,13 @@ public class GuardarMensajes {
         if (!resourcesDir.exists()) {
             boolean dirCreated = resourcesDir.mkdir();
             if (dirCreated) {
-                console.printf("Carpeta creada: %s%n", resourcesDir.getAbsolutePath());
+                System.out.println("Carpeta creada: " + resourcesDir.getAbsolutePath());
             } else {
-                console.printf("Error creando la carpeta%n");
+                System.out.println("Error creando la carpeta");
                 System.exit(1);
             }
         } else {
-            console.printf("La carpeta ya existe%n");
+            System.out.println("La carpeta ya existe");
         }
 
         // Escribir archivo
@@ -42,11 +32,11 @@ public class GuardarMensajes {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {
             writer.write("este es un ejemplo de escritura");
             writer.newLine();
-            console.printf("Archivo escrito exitosamente: %s%n", outputFile.getAbsolutePath());
+            System.out.println("Archivo escrito exitosamente: " + outputFile.getAbsolutePath());
         } catch (IOException e) {
-            console.printf("Error escribiendo el archivo: %s%n", e.getMessage());
+            System.out.println("Error escribiendo el archivo: " + e.getMessage());
         }
 
-        console.printf("%n=== DEMOSTRACIÓN COMPLETADA ===%n");
+        System.out.println("\n=== DEMOSTRACIÓN COMPLETADA ===");
     }
 }
